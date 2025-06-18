@@ -1,10 +1,12 @@
+import { createError } from "../utils/createError.js";
+
 export const listUser = (req, res, next) => {
   try {
     // 1.Check Email
-    if (false) {
-      throw new Error("Email already exist")
+    if (true) {
+      createError(400, "Email already exist");
     } else {
-      throw new Error("Password is INVALID")
+      throw new Error("Password is INVALID");
     }
     res.json({ message: "This is List All User" });
   } catch (error) {
