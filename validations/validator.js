@@ -11,6 +11,11 @@ export const registerSchema = object({
   ),
 });
 
+export const loginSchema = object({
+  email: string().email("Incorrect Email").required("Enter your Email"),
+  password: string().min(6, "Password must be at least 6 letters"),
+});
+
 export const validate = (schema) => async (req, res, next) => {
   // code body
   try {

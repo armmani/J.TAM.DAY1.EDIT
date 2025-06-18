@@ -47,7 +47,7 @@ export const register = async (req, res, next) => {
   }
 };
 
-export const login = (req, res) => {
+export const login = async (req, res, next) => {
   // TODO
   /*
     1. Validate Body
@@ -57,6 +57,9 @@ export const login = (req, res) => {
     5. Create token
     6. Response
   */
- 
-  res.json({ message: "This is Login" });
+  try {
+    res.json({ message: "This is Login" });
+  } catch (error) {
+    next(error);
+  }
 };
