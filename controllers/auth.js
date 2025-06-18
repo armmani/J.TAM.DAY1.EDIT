@@ -1,10 +1,13 @@
 import prisma from "../config/prisma.js";
 import { createError } from "../utils/createError.js";
+import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken'
 
 export const register = async (req, res, next) => {
   try {
     // TODO Overview Register
     /*
+    0. Validate with yup
     1.Check body
     2.Check Email in DB
     3.Encrypt Password => bcryptjs
@@ -27,6 +30,8 @@ export const register = async (req, res, next) => {
       createError(400, "Email already Exist")
     }
     // Step 3 Encrypt Password
+    const hashPassword = bcrypt.hashSync(password, 10)
+    console.log(hashPassword)
 
     res.json({ message: "This is Register" });
   } catch (error) {
