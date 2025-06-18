@@ -48,17 +48,48 @@ export const register = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  // TODO
-  /*
-    1. Validate Body
-    2. Check Body
-    3. Check Email in DB
-    4. Check pwd
-    5. Create token
-    6. Response
-  */
   try {
-    res.json({ message: "This is Login" });
+    // TODO
+    /*
+      1. Validate Body
+      2. Check Body
+      3. Check Email in DB
+      4. Check pwd
+      5. Create token
+      6. Response
+    */
+    // Step 2 Check Body
+    const { email, password } = req.body;
+
+    // Step 3 Check Email
+    const user = await prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
+    console.log(user);
+    if (!user) {
+      createError(400, "Email or Password is INVALID");
+    }
+    // Step 4 Check pwd
+    const checkPassword = bcrypt.compareSync(password, user.password);
+
+    if (!checkPassword) {
+      createError(400, "Email or Password is INVALID pwd");
+    }
+
+    // Step 5 Generate token
+    const payload = {
+      id: user.id,
+      role: user.role,
+    };
+    const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1d" });
+
+    res.json({
+      message: `Welcome Back ${user.name}`,
+      payload: payload,
+      token: token,
+    });
   } catch (error) {
     next(error);
   }

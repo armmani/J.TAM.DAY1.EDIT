@@ -1,14 +1,17 @@
 import express from "express";
 // Controllers
 import { login, register } from "../controllers/auth.js";
-import { registerSchema, validate } from "../validations/validator.js";
-
+import {
+  loginSchema,
+  registerSchema,
+  validate,
+} from "../validations/validator.js";
 
 const router = express.Router();
 
 // ENDPOINT http://localhost:8000/auth/register
 router.post("/register", validate(registerSchema), register);
-router.post("/login", login);
+router.post("/login", validate(loginSchema), login);
 
 //Export
 export default router;
