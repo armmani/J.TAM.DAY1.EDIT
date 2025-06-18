@@ -1,4 +1,7 @@
-export const authCheck = (req, res) => {
+export const authCheck = (req, res, next) => {
   // code body
-  console.log("This is Middleware");
+  if (true) {
+    console.log("This is Middleware");
+    next();
+  }
 };

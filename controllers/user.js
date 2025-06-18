@@ -1,6 +1,11 @@
-export const listUser = (req, res) => {
-  //code body
-  res.json({ message: "This is List All User" });
+export const listUser = (req, res, next) => {
+  try {
+    //code body
+    sdflkd;
+    res.json({ message: "This is List All User" });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const readUser = (req, res) => {
