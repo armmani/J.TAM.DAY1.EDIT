@@ -23,7 +23,7 @@ app.use("/auth", authRouter);
 // Error Handling
 app.use((err, req, res, next) => {
   // code body
-  res.status(500).json({ message: "Something long" });
+  res.status(500).json({ message: err.message || "Something long" });
 });
 
 const PORT = 8000;

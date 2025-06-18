@@ -1,7 +1,11 @@
 export const listUser = (req, res, next) => {
   try {
-    //code body
-    sdflkd;
+    // 1.Check Email
+    if (false) {
+      throw new Error("Email already exist")
+    } else {
+      throw new Error("Password is INVALID")
+    }
     res.json({ message: "This is List All User" });
   } catch (error) {
     next(error);

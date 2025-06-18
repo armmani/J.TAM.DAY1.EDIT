@@ -1,0 +1,4 @@
+const createError = () => {
+  // code body
+  
+}
