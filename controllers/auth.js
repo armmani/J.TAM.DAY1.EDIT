@@ -1,7 +1,7 @@
 import prisma from "../config/prisma.js";
 import { createError } from "../utils/createError.js";
 import bcrypt from "bcryptjs";
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
   try {
@@ -21,18 +21,26 @@ export const register = async (req, res, next) => {
 
     // Step 2 Check Email in DB
     const user = await prisma.user.findFirst({
-      where:{
-        email:email
-      }
-    })
-    console.log(user)
-    if(user) {
-      createError(400, "Email already Exist")
+      where: {
+        email: email,
+      },
+    });
+    console.log(user);
+    if (user) {
+      createError(400, "Email already Exist");
     }
     // Step 3 Encrypt Password
-    const hashPassword = bcrypt.hashSync(password, 10)
-    console.log(hashPassword)
+    const hashPassword = bcrypt.hashSync(password, 10);
+    console.log(hashPassword);
 
+    // Step 4 Save to DB
+    const result = await prisma.user.create({
+      data: {
+        email: email,
+        name: name,
+        password: hashPassword,
+      },
+    });
     res.json({ message: "This is Register" });
   } catch (error) {
     next(error);
@@ -40,5 +48,15 @@ export const register = async (req, res, next) => {
 };
 
 export const login = (req, res) => {
+  // TODO
+  /*
+    1. Validate Body
+    2. Check Body
+    3. Check Email in DB
+    4. Check pwd
+    5. Create token
+    6. Response
+  */
+ 
   res.json({ message: "This is Login" });
 };
