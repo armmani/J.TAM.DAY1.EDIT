@@ -5,6 +5,7 @@ import morgan from "morgan";
 import userRouter from "./routes/user.js";
 import authRouter from "./routes/auth.js";
 import error from "./utils/error.js";
+import notfound from "./utils/404notfound.js";
 
 const app = express();
 
@@ -25,9 +26,7 @@ app.use("/auth", authRouter);
 app.use(error);
 
 //404
-app.use((req, res) => {
-  res.status(404).json({message: "404 Not Found"})
-})
+app.use(notfound)
 
 const PORT = 8000;
 // Start Server
