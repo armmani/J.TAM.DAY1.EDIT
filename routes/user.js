@@ -6,6 +6,7 @@ import {
   listUser,
   readUser,
   updateRoleUser,
+  getMe,
 } from "../controllers/user.js";
 import { authCheck } from "../middlewares/auth.middleware.js";
 // Middleware
@@ -16,6 +17,8 @@ const router = express.Router();
 router.get("/users", authCheck, listUser);
 router.patch("/user/role/:id", authCheck, updateRoleUser);
 router.delete("/user/:id", authCheck, deleteUser);
+
+router.get("/getme", authCheck, getMe);
 
 router.get("/user", readUser);
 router.post("/user", createUser);

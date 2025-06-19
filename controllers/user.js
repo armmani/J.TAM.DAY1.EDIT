@@ -4,12 +4,12 @@ import prisma from "../config/prisma.js";
 export const listUser = async (req, res, next) => {
   try {
     const user = await prisma.user.findMany({
-      omit:{
-        password:true
-      }
+      omit: {
+        password: true,
+      },
     });
     console.log(user);
-    
+
     res.json({
       message: "This is List All User",
       result: user,
@@ -20,7 +20,21 @@ export const listUser = async (req, res, next) => {
 };
 export const updateRoleUser = async (req, res, next) => {
   try {
-    res.json({ message: "This is Update Role User" });
+    // 1. Read params & body
+    const { id } = req.params;
+    const { role } = req.body;
+    console.log(id, role);
+    // 2. Update to DB
+    const user = await prisma.user.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        role: role,
+      },
+    });
+
+    res.json({ message: `UPDATED Role ${user.name} to ${user.role}` });
   } catch (error) {
     next(error);
   }
@@ -28,11 +42,18 @@ export const updateRoleUser = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
   try {
-    res.json({ message: "This is DELETE User" });
+    const { id } = req.params;
+    const user = await prisma.user.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+    res.json({ message: "User Deleted" });
   } catch (error) {
     next(error);
   }
 };
+
 
 export const readUser = (req, res) => {
   res.json({ message: "This is Read User" });
