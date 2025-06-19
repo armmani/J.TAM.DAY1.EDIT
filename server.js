@@ -4,6 +4,7 @@ import morgan from "morgan";
 //Routing
 import userRouter from "./routes/user.js";
 import authRouter from "./routes/auth.js";
+import error from "./utils/error.js";
 
 const app = express();
 
@@ -21,12 +22,7 @@ app.use("/api", userRouter);
 app.use("/auth", authRouter);
 
 // Error Handling
-app.use((err, req, res, next) => {
-  // code body
-  res
-    .status(err.code || 500)
-    .json({ message: err.message || "Something long" });
-});
+app.use(error);
 
 const PORT = 8000;
 // Start Server

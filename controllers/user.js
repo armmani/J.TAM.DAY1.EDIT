@@ -67,7 +67,7 @@ export const getMe = async (req, res, next) => {
       },
     });
 
-    res.json({ result: user });
+    res.json({ result: user, message: `${user.name} are logging in` });
   } catch (error) {
     next(error);
   }
