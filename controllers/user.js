@@ -1,10 +1,19 @@
 import { createError } from "../utils/createError.js";
+import prisma from "../config/prisma.js";
 
 export const listUser = async (req, res, next) => {
   try {
-    // 1.Check Email
-
-    res.json({ message: "This is List All User" });
+    const user = await prisma.user.findMany({
+      omit:{
+        password:true
+      }
+    });
+    console.log(user);
+    
+    res.json({
+      message: "This is List All User",
+      result: user,
+    });
   } catch (error) {
     next(error);
   }

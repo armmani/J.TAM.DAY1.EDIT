@@ -20,12 +20,12 @@ export const authCheck = (req, res, next) => {
 
     // 2 Split Token Bearer
     const token = header.split(" ")[1];
-    console.log(token);
+    // console.log(token);
 
     // 3 Verify JWT
     jwt.verify(token, process.env.SECRET, (error, decode) => {
-      console.log(error);
-      console.log(decode);
+      // console.log(error);
+      // console.log(decode);
       if (error) {
         createError(401, "Token is INVALID");
       }
