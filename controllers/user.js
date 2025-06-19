@@ -1,14 +1,25 @@
 import { createError } from "../utils/createError.js";
 
-export const listUser = (req, res, next) => {
+export const listUser = async (req, res, next) => {
   try {
     // 1.Check Email
-    if (true) {
-      createError(400, "Email already exist");
-    } else {
-      throw new Error("Password is INVALID");
-    }
+
     res.json({ message: "This is List All User" });
+  } catch (error) {
+    next(error);
+  }
+};
+export const updateRoleUser = async (req, res, next) => {
+  try {
+    res.json({ message: "This is Update Role User" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteUser = async (req, res, next) => {
+  try {
+    res.json({ message: "This is DELETE User" });
   } catch (error) {
     next(error);
   }
@@ -20,12 +31,4 @@ export const readUser = (req, res) => {
 
 export const createUser = (req, res) => {
   res.json({ message: "This is Create User" });
-};
-
-export const updateRoleUser = (req, res) => {
-  res.json({ message: "This is Update User's Role" });
-};
-
-export const deleteUser = (req, res) => {
-  res.json({ message: "This is DELETE User" });
 };
