@@ -41,7 +41,7 @@ export const register = async (req, res, next) => {
         password: hashPassword,
       },
     });
-    res.json({ message: "This is Register" });
+    res.json({ message: "REGISTERED" });
   } catch (error) {
     next(error);
   }
